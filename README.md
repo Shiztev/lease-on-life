@@ -1,2 +1,2 @@
 # lease-on-life
-Monthly rent calculator
+Calculator for monthly rent per roommate.
