@@ -24,6 +24,12 @@ int ARG_SAVE_C = 4;
 typedef enum calc_mode { CALC, SAVE } Mode;
 
 
+/**
+ * @brief Safely handle errors.
+ * 
+ * @param name Program name, often found in argv[0]
+ * @return int Success code
+ */
 int handle_error(char* name)
 {
   fprintf(stderr, USAGE, name);
@@ -52,7 +58,6 @@ int main(int argc, char const *argv[])
     case 'h': fprintf(stdout, USAGE, argv[0]); return EXIT_SUCCESS;
     case 's': if (argc >= ARG_SAVE_C) { mode = SAVE; break; }
               else { return handle_error(argv[0]); }
-
     default: break;
     }
   }
