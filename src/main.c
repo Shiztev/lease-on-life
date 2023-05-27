@@ -11,11 +11,24 @@
 #include <unistd.h>
 #include <string.h>
 
+#if !defined(HAVE_GETOPT_H)  // from getopt.h
+int optind = 0;
+#endif
 
-char* USAGE = "Usage: %s [OPTIONS]... [RENT] [DATE]\nOptions\n\t-h\n\t\tprints this usage message\n\t-s\n\t\tsave's the calculated rent under the provided date in rent.csv\nArguments\n\t- Rent\n\t\trent amount to two decimal places\n\t- Date\n\t\t(optional) should be in dd-mm-yyyy format\n";
+
+char* USAGE = "Usage: %s [OPTIONS]... [RENT] [DATE]\nOptions\n\t-h\n\t\tprints this usage message\n\t-s\n\t\tsave's the calculated rent under the provided date in rent.csv\nArguments\n\t- Rent\n\t\trent amount to two decimal places\n\t- Date\n\t\t(necessary for -s) should be in dd-mm-yyyy format\n";
+int ARG_CALC_C = 2;
+int ARG_SAVE_C = 4;
 
 
 typedef enum calc_mode { CALC, SAVE } Mode;
+
+
+int handle_error(char* name)
+{
+  fprintf(stderr, USAGE, name);
+  return EXIT_FAILURE;
+}
 
 
 /**
@@ -37,27 +50,34 @@ int main(int argc, char const *argv[])
     switch (opt) 
     {
     case 'h': fprintf(stdout, USAGE, argv[0]); return EXIT_SUCCESS;
-    case 's': mode = SAVE; break;
+    case 's': if (argc >= ARG_SAVE_C) { mode = SAVE; break; }
+              else { return handle_error(argv[0]); }
+
     default: break;
     }
   }
 
-  if (optind == argc) {
-    fprintf(stderr, USAGE, argv[0]);
-    return EXIT_FAILURE;
+  if (optind == argc) {  // Note: optind defined by unistd.h
+    return handle_error(argv[0]);
   }
 
-  if (mode == CALC) {
-    // TODO
+  if (argc >= ARG_CALC_C) {
+    rent = atof(argv[optind++]);
+    // TODO: calculate rent per roommate
 
-  } else if (mode == SAVE) {
-    // TODO
+    // read each resident file
+    // generate expenditures (per roommate)
+    // print to stdout
+
+    if (mode == SAVE) {
+      date = argv[optind++];
+      // TODO: save results to csv
+    }
+
+  } else {
+    return handle_error(argv[0]);
   }
 
-  // read each resident file
-  // generate expenditures (per roommate)
-  // print to stdout
-  // save results to csv
   return EXIT_SUCCESS;
 }
 
