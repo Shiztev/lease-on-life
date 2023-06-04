@@ -1,5 +1,9 @@
 ### VSCode ###
 .vscode/
 
-### Binaries ###
+### Binaries/compilation residue ###
+*.o
 lol
+
+### Userdata ###
+data/

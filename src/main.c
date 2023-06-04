@@ -3,6 +3,9 @@
  * @author Stevie Alvarez (stevie.6strings@gmail.com)
  * @brief Calculates the monthly rent for each resident.
  * @version 0.1
+ * 
+ * @copyright Copyright (c) 2023
+ * 
  */
 
 #include <stdbool.h>
@@ -10,6 +13,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+
+#include "expenses.h"
 
 #if !defined(HAVE_GETOPT_H)  // from getopt.h
 int optind = 0;
