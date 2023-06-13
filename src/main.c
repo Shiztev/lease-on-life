@@ -21,11 +21,11 @@ int optind = 0;
 #endif
 
 
-char* USAGE = "Usage: %s [OPTIONS]... [RENT] [DATE]\nOptions\n\t-h\n\t\t"
-	"prints this usage message\n\t-s\n\t\tsave's the calculated rent under the "
-	"provided date in rent.csv\nArguments\n\t- Rent\n\t\trent amount to two "
-	"decimal places\n\t- Date\n\t\t(necessary for -s) should be in dd-mm-yyyy "
-	"format\n";
+char* USAGE = "Usage: %s [OPTIONS]... [RENT] [DATE]\nOptions\n\t-h"
+	"\n\t\tprints this usage message\n\t-s\n\t\tsave's the calculated "
+	"rent under the provided date in rent.csv\nArguments\n\t- Rent\n\t\t"
+	"rent amount to two decimal places\n\t- Date\n\t\t(necessary for -s) "
+	"should be in dd-mm-yyyy format\n";
 int ARG_CALC_C = 2;
 int ARG_SAVE_C = 4;
 
